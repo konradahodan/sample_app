@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Simple App du Tutoriel Ruby on Rails | <%= @titre %></title>
+    <title><%= titre %></title>
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' %>
   </head>
   <body>
-    <h1>Contact</h1>
-    <p>
-      Contact Ruby on Rails Tutorial à propos de l'Application Exemple à
-      <a href="http://railstutorial.org/feedback">feedback page</a>.
-    </p>
+    <div class="container">
+      <header>
+        <%= image_tag("logo.png", :alt => "Application Exemple", :class => "round") %>
+        <nav class="round">
+          <ul>
+            <li><%= link_to "Accueil", '#' %></li>
+            <li><%= link_to "Aide", '#' %></li>
+            <li><%= link_to "Inscription", '#' %></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="round">
+        <%= yield %>
+      </section>
+    </div>
   </body>
 </html>
