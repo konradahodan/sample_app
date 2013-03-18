@@ -1,5 +1,9 @@
 SampleApp::Application.routes.draw do
+
+  resources :users
   
+  get "utilisateurs/new"
+
   get "users/new"
 
   match '/signup' => 'users#new'
