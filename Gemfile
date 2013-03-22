@@ -6,6 +6,7 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'gravatar_image_tag', '0.1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +25,7 @@ gem 'jquery-rails'
 group :development do
   gem 'rspec-rails', '>= 2.6'
   gem 'annotate', '2.5.0'
+  gem 'magic_encoding', "~> 0.0.2"
 end
 
 group :test do
@@ -31,6 +33,7 @@ group :test do
   gem 'webrat', '0.7.1'
   gem "ZenTest", "4.6.0"
   gem 'spork', '0.9.0.rc5'
+  gem 'factory_girl_rails', '1.0'
 end
 
 # To use ActiveModel has_secure_password
