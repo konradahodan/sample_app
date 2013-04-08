@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
 
   # Retour true (vrai) si le mot de passe correspond.
-  def has_password?(password_soumis)
+  def has_password?(submitted_password)
     # Compare encrypted_password avec la version cryptée de
     # password_soumis.
     encrypted_password == encrypt(submitted_password)
@@ -43,6 +43,11 @@ class User < ActiveRecord::Base
     user = find_by_email(email)
     return nil  if user.nil?
     return user if user.has_password?(submitted_password)
+  end
+
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && user.salt == cookie_salt) ? user : nil
   end
 
   private

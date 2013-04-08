@@ -37,6 +37,7 @@ describe UsersController do
   end
 
   describe "GET 'new'" do
+
     it "should be successful" do
       get :new
       response.should be_success
@@ -46,6 +47,28 @@ describe UsersController do
       get :new
       response.should have_selector("title", :content => "Sign up")
     end
+
+    it "devrait avoir un champ nom" do
+      get :new
+      response.should have_selector("input[nom='user[nom]'][type='text']")
+    end
+
+    it "devrait avoir un champ email"  do
+      get  :new
+      response.should have_selector("input[email='user[email]'][type='text']")
+    end
+
+    it "devrait avoir un champ mot de passe" do
+      get :new
+      response.should have_selector("input[password='user[password]'][type='password_field']")
+    end
+
+    it "devrait avoir un champ confirmation du mot de passe" do
+      get :new
+      response.should have_selector("input[password_confirmation='user[password_confirmation]'][type='password_field']")
+    end
+
+
   end
 
   describe "POST 'create'" do
@@ -74,7 +97,7 @@ describe UsersController do
       end
     end
 
-    describe "succès" do
+    describe "success" do
 
       before(:each) do
         @attr = { :nom => "New User", :email => "user@example.com",
@@ -95,6 +118,11 @@ describe UsersController do
       it "devrait avoir un message de bienvenue" do
         post :create, :user => @attr
         flash[:success].should =~ /Bienvenue dans l'Application Exemple/i
+      end
+
+      it "devrait identifier l'utilisateur" do
+        post :create, :user => @attr
+        controller.should be_signed_in
       end
     end
   end
